@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 
@@ -10,14 +11,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
 
-const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const HomeScreen: React.FC<HomeScreenProps> = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text>Home Screen</Text>
-      <Button title="Open Sidebar" onPress={() => navigation.toggleDrawer()} />
+      <Button
+        title="Open Sidebar"
+        onPress={() => navigation.navigate('Login')}
+      />
     </View>
   );
 };
