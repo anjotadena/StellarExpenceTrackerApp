@@ -8,23 +8,10 @@ import {
 import HomeScreen from './screens/Home';
 import LoginScreen from './screens/Login';
 import {createStackNavigator} from '@react-navigation/stack';
+import Sidebar from './components/Sidebar';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-
-const CustomSidebar = (props: any) => {
-  const {state, ...rest} = props;
-  const newState = {
-    ...state,
-    routes: state.routes.filter((item: any) => item.name !== 'Login'),
-  };
-
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList state={newState} {...rest} />
-    </DrawerContentScrollView>
-  );
-};
 
 const AppNavigator: React.FC = () => {
   return (
@@ -33,10 +20,9 @@ const AppNavigator: React.FC = () => {
         initialRouteName="Login"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Home">
+        <Stack.Screen name="Main">
           {() => (
-            <Drawer.Navigator
-              drawerContent={props => <CustomSidebar {...props} />}>
+            <Drawer.Navigator drawerContent={props => <Sidebar {...props} />}>
               <Drawer.Screen name="Home" component={HomeScreen} />
               {/* Add other screens here */}
             </Drawer.Navigator>

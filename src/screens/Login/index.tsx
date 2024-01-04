@@ -1,27 +1,7 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {View, TextInput, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-  },
-  header: {
-    fontSize: 24,
-    marginBottom: 24,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 16,
-    padding: 8,
-    width: '100%',
-  },
-});
+import {Card, Title, Button} from 'react-native-paper';
 
 const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -31,30 +11,66 @@ const LoginScreen: React.FC = () => {
   const handleLogin = () => {
     // Add your authentication logic here
     // For simplicity, always navigate to the Home screen
-    navigation.navigate('Home');
+    navigation.navigate('Main');
   };
 
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
-      <TextInput
-        const
-        style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={text => setUsername(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
-
-      <Button title="Login" onPress={handleLogin} />
+      <Card style={styles.card}>
+        <Card.Content>
+          <Title style={styles.title}>Login</Title>
+          <TextInput
+            style={styles.input}
+            placeholder="Username"
+            value={username}
+            onChangeText={text => setUsername(text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry
+            value={password}
+            onChangeText={text => setPassword(text)}
+          />
+        </Card.Content>
+        <Card.Actions style={styles.cardActions}>
+          <Button
+            mode="contained"
+            onPress={handleLogin}
+            style={styles.loginButton}>
+            Login
+          </Button>
+        </Card.Actions>
+      </Card>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
+  card: {
+    margin: 16,
+    elevation: 4, // Adds a shadow
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  input: {
+    marginBottom: 16,
+  },
+  cardActions: {
+    justifyContent: 'center',
+  },
+  loginButton: {
+    width: '50%',
+    alignSelf: 'center',
+  },
+});
 
 export default LoginScreen;
