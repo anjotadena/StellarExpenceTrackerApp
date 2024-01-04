@@ -15,8 +15,9 @@ interface RecentTransactionListProps {
 const RecentTransactionList: React.FC<RecentTransactionListProps> = ({
   transactions,
 }) => {
-  const renderTransactionItem = ({item}: {item: Transaction}) => (
+  const renderTransactionItem = (item: Transaction) => (
     <List.Item
+      key={item.id}
       title={item.description}
       description={'2022-01-01'}
       style={styles.transactionItem}
@@ -30,11 +31,7 @@ const RecentTransactionList: React.FC<RecentTransactionListProps> = ({
   return (
     <View style={styles.container}>
       <Title style={styles.title}>Recent Transactions</Title>
-      <FlatList
-        data={transactions}
-        renderItem={renderTransactionItem}
-        keyExtractor={item => item.id}
-      />
+      {transactions.map(renderTransactionItem)}
     </View>
   );
 };

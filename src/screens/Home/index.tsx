@@ -18,8 +18,8 @@ interface HomeScreenProps {
 const styles = StyleSheet.create({
   container: {
     // alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
+    justifyContent: 'space-between',
+    // flex: 1,
   },
   card: {
     marginTop: 20,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     padding: 5,
     marginTop: 10,
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
   },
   scrollContainer: {
     flex: 1,
@@ -114,30 +114,27 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   ];
 
   return (
-    <>
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={item => item.title}
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {x: scrollX}}}],
-            {useNativeDriver: false},
-          )}
-          pagingEnabled
-        />
-        <View style={styles.minContainer}>
-          <IconCard icon="🚀" title="Rocket" />
-          <IconCard icon="💳" title="Credit Card" />
-          <IconCard icon="💰" title="Money Bag" />
-          <IconCard icon="📊" title="Charts" />
-        </View>
-        <RecentTransactionList transactions={recentTransactions} />
+    <ScrollView contentContainerStyle={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={item => item.title}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {x: scrollX}}}],
+          {useNativeDriver: false},
+        )}
+        pagingEnabled
+      />
+      <View style={styles.minContainer}>
+        <IconCard icon="🚀" title="Rocket" />
+        <IconCard icon="💳" title="Credit Card" />
+        <IconCard icon="💰" title="Money Bag" />
+        <IconCard icon="📊" title="Charts" />
       </View>
-      {/* Your other components */}
-    </>
+      <RecentTransactionList transactions={recentTransactions} />
+    </ScrollView>
   );
 };
 
