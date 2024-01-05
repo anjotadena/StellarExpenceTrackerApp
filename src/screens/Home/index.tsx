@@ -23,6 +23,7 @@ import {
   PaperProvider,
   Text,
 } from 'react-native-paper';
+import PieChart from 'react-native-pie-chart';
 
 interface HomeScreenProps {
   navigation: any; // Type for navigation prop
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 7,
     padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   cardImage: {
     ...StyleSheet.absoluteFillObject,
@@ -122,6 +126,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   const renderItem = ({item, index}: {item: any; index: number}) => {
     const inputRange = [(index - 1) * 300, index * 300, (index + 1) * 300];
+    const widthAndHeight = 70;
+    const series = [321, 500];
+    const sliceColor = ['#F4B15B', '#e3caa9'];
 
     const translateY = scrollX.interpolate({
       inputRange,
@@ -136,13 +143,26 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
     return (
       <Animated.View style={[styles.card, {transform: [{translateY}]}]}>
-        <Image source={{uri: item.image}} style={styles.cardImage} />
-        <Text variant='labelLarge' style={styles.cardTitle} onPress={handleItemPress}>
-          {item.title}
+        <View>
+          <Text
+            variant="labelLarge"
+            style={styles.cardTitle}
+            onPress={handleItemPress}>
+            {item.title}
 
-          <Icon size={15} source="trending-up" />
-        </Text>
-        <Text variant='titleSmall' style={styles.cardSubtitle}>{item.subtitle}</Text>
+            <Icon size={15} source="trending-up" />
+          </Text>
+          <Text variant="titleSmall" style={styles.cardSubtitle}>
+            {item.subtitle}
+          </Text>
+        </View>
+        <PieChart
+          widthAndHeight={widthAndHeight}
+          series={series}
+          sliceColor={sliceColor}
+          coverRadius={0.45}
+          coverFill={'#FFF'}
+        />
       </Animated.View>
     );
   };
