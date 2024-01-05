@@ -1,7 +1,7 @@
 // components/IconCard.tsx
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Card, Title} from 'react-native-paper';
+import {Card, Icon, Title} from 'react-native-paper';
 
 interface IconCardProps {
   icon: string; // Icon name (replace with your icon library or source)
@@ -15,7 +15,7 @@ const IconCard: React.FC<IconCardProps> = ({icon, title}) => {
       <Card style={styles.card}>
         <Card.Content style={styles.cardContent}>
           {/* Replace with your icon component or library */}
-          <Text style={styles.icon}>{icon}</Text>
+          <Icon color="#27af62" size={35} source={icon} />
         </Card.Content>
       </Card>
 
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     height: 70,
-    elevation: 4,
-    borderRadius: 10,
+    elevation: 0,
+    borderRadius: 5,
   },
   cardContent: {
     alignItems: 'center',

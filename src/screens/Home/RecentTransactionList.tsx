@@ -6,6 +6,7 @@ interface Transaction {
   id: string;
   description: string;
   amount: number;
+  cashIn?: boolean;
 }
 
 interface RecentTransactionListProps {
@@ -18,12 +19,26 @@ const RecentTransactionList: React.FC<RecentTransactionListProps> = ({
   const renderTransactionItem = (item: Transaction) => (
     <List.Item
       key={item.id}
-      title={item.description}
-      description={'2022-01-01'}
+      title={() => <Text style={{ color: '#1e1e1e' }} variant='labelLarge'>{item.description}</Text>}
+      description={() => <Text style={{ color: '#757575' }} variant='labelSmall'>2021-01-01</Text>}
       style={styles.transactionItem}
-      left={() => <List.Icon icon="arrow-down" />}
+      left={() => (
+        <View
+          style={{
+            padding: 5,
+            backgroundColor: !item?.cashIn ? '#f5dcb3' : '#d7e9d8',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+          }}>
+          <List.Icon
+            color={item.cashIn ? '#065019' : '#FFA312'}
+            icon={item.cashIn ? 'trending-up' : 'trending-down'}
+          />
+        </View>
+      )}
       right={() => (
-        <Text variant="titleMedium">{`$${item.amount.toFixed(2)}`}</Text>
+        <Text variant="titleSmall">{`$${item.amount.toFixed(2)}`}</Text>
       )}
     />
   );
